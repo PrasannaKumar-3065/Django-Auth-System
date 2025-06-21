@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <style>
+        .input-error {
+            border: 2px solid red !important;
+          }
+    </style>
+</head>
+<body>
+    <header class="text-center p-3">
+        <h1>Auth System SignUp</h1>
+    </header>
+    <main class="d-flex justify-content-center align-items-center">
+        <form id='signupform' method="POST" class="p-4 border rounded shadow">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">re-type Password</label>
+                <input type="password" name="password-re" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+                <label id="form-error" class="form-label text-danger"></label>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mb-3 messages">
+                        <label class="form-label text-danger">{{message}}</label>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <p class="text-center"><a href="{% url 'IsoSignUpView' %}" class="link-primary">Signup</a></p>
+        </form>
+    </main>
+    <footer class="text-center p-3 text-muted">
+        <h6>All rights reserved</h6>
+    </footer>
+</body>
+<Script>
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            const isoErrors = document.getElementsByClassName('messages');
+            [...isoErrors].map((error)=>{
+                error.style.display = 'none'
+            })
+        }, 3000)
+        document.getElementById('signupform').addEventListener('submit', (isoEvent) => {
+          const isoPassword = document.getElementsByName('password')[0].value
+          const isoRePassword = document.getElementsByName('password-re')[0].value
+          if (isoPassword !== isoRePassword) {
+            isoEvent.preventDefault()
+            document.getElementsByName('password-re')[0].classList.add('input-error')
+            document.getElementById('form-error').innerText = 'Passwords do not match'
+          }else{
+            document.getElementsByName('password-re')[0].classList.remove('input-error')
+            documnt.getElementById('form-error').innerText = ''
+          }
+        })
+      })
+</script>
+</html>
