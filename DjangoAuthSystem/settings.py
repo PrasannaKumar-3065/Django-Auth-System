@@ -74,16 +74,16 @@ WSGI_APPLICATION = 'DjangoAuthSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DB_USER_ACCOUNT = 'djangoauthentication'
-DATABASE_USER = 'yesit'
-DATABASE_PASSWORD = 'Yesit#123'
-DATABASE_HOST = 'localhost'
-DATABASE_POST = '3306'
+DATABASE_NAME = ''
+DATABASE_USER = ''
+DATABASE_PASSWORD = ''
+DATABASE_HOST = ''
+DATABASE_POST = ''
 
 DATABASES = {
         'default': {
                 'ENGINE': 'django.db.backends.mysql',
-                'NAME': DB_USER_ACCOUNT,
+                'NAME': DATABASE_NAME,
                 'USER': DATABASE_USER,
                 'PASSWORD': DATABASE_PASSWORD,
                 'HOST': DATABASE_HOST,
